@@ -1,7 +1,7 @@
 <template>
   <v-app :dark="dark_theme">
     <my-tool v-if="user && verificato"></my-tool>
-      <v-container fluid class="JosefinFont">
+      <v-container fluid class="JosefinFont" v-bind:class="{ wallpaper: !dark_theme, wallpaperDark: dark_theme }">
         <my-snack></my-snack>
         <my-confirm></my-confirm>
         <main fill-height><router-view></router-view></main>
@@ -62,4 +62,12 @@ export default {
 .JosefinFont {
   font-family: 'Josefin Sans', sans-serif;
 }
+
+.wallpaper{
+background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+.wallpaperDark{
+background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+}
+
 </style>

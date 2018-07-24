@@ -24,18 +24,22 @@ Vue.use(Vuetify, {
 })
 
 auth.onAuthStateChanged(function(user) {
+  store.commit('utente/auth_flag',true)
+  console.log('Auth change auth_flag:' + store.getters['utente/auth_flag'])
   if(user!=undefined && user.emailVerified == true){ 
     router.push({ path: `/Analisi` }) 
     user['db'] = db
     store.dispatch('utente/user',user)
   }
   else if(user!=undefined && user.emailVerified == false){
-    router.push({ path: `/` })
+    console.log('welcome 1')
+    router.push({ path: `/Welcome` })
     user['db'] = db
     store.dispatch('utente/user',user)
   }
   else { 
-    router.push({ path: `/` })
+    console.log('welcome 2')
+    router.push({ path: `/Welcome` })
     store.dispatch('impostazioni/clear_impostazioni')
     store.dispatch('utente/user',undefined)
   }
@@ -43,15 +47,21 @@ auth.onAuthStateChanged(function(user) {
 
 
 router.beforeEach((to, from, next) => {
+  console.log('before each from: '+ from.path + ' to:' + to.path + ' exist: ' + to.matched.length)
   const currentUser = auth.currentUser;
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-  if (requiresAuth && !currentUser) {
-   next('/');
-  } else if (requiresAuth && currentUser) {
-   next();
-  } else {
-   next();
-  }
+  const auth_flag = store.getters['utente/auth_flag']
+  console.log('before each auth_flag:' + auth_flag)
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  if(to.matched.length) {
+    if (auth_flag && requiresAuth && !currentUser) {
+      console.log('welcome 3')
+      next('/Welcome')
+    } else if (requiresAuth && currentUser) {
+      next();
+    } else {
+      next();
+    }
+  } else next(from.path);
 })
 
 /* eslint-disable no-new */

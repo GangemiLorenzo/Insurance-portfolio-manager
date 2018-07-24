@@ -1,7 +1,7 @@
 <template>
 <v-flex>
 
-<v-toolbar class="hidden-sm-and-down" flat>
+<v-toolbar class="hidden-sm-and-down">
     <v-toolbar-title>{{ INFO.APP_NAME }}</v-toolbar-title>
     <v-divider class="mx-2" inset vertical></v-divider>
     <v-spacer></v-spacer>
@@ -27,7 +27,7 @@
 </v-toolbar>
 
 
-<v-toolbar class="hidden-md-and-up" flat>
+<v-toolbar class="hidden-md-and-up">
     <v-toolbar-title>{{ INFO.APP_NAME }}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
@@ -89,6 +89,7 @@ export default {
       menu_actions: [
         { title: 'Impostazioni', icona: 'exit_to_app', event: this.impostazioni},
         { title: 'Utente', icona: 'exit_to_app', event: this.utente},
+        { title: 'Documentazione', icona: 'exit_to_app', event: this.documentazione},
         { title: 'Offrimi un caffe', icona: 'exit_to_app', event: this.donate},
         { title: 'Esci', icona: 'exit_to_app', event: this.logout}
       ]
@@ -110,6 +111,10 @@ export default {
     utente: () => {
       store.commit('bus/menu_dialog_model',false)
       router.push({ path: '/Utente' })
+    },
+    documentazione: () => {
+      store.commit('bus/menu_dialog_model',false)
+      window.open(process.env.DOC_LINK)
     }
   },
   components: {

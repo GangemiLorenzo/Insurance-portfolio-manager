@@ -5,7 +5,12 @@ const state = {
   verificato: false,
   email: undefined,
   username: undefined,
-  user_refs: undefined
+  user_refs: undefined,
+  auth_flag: false  //flag to check if the app has already checked the auth state or not
+                    //once the app check the auth, this flag is set to true even if the user is not logged in
+                    //Capitava che ricaricando la pagina anche se si era gia loggati veniva mostrato momentaneamente il login
+                    //Questo perchè la pagina di login ancora non sapeva di essere loggata e finche non arrivava il riscontro
+                    //della Auth lei aveva la priorità di essere mostrata
 }
 
 // mutations
@@ -27,6 +32,9 @@ const mutations = {
     },
     user_refs (state, ref) {
         state.user_refs = ref
+    },
+    auth_flag (state, auth_flag) {
+        state.auth_flag = auth_flag
     }
 }
 
@@ -75,7 +83,8 @@ const getters = {
     verificato: state => { return state.verificato },
     email: state => { return state.email },
     username: state => { return state.username },
-    user_refs: state => { return state.user_refs}
+    user_refs: state => { return state.user_refs},
+    auth_flag: state => { return state.auth_flag}
 }
 
 export default {

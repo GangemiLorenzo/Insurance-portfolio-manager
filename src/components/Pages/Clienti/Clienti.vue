@@ -1,6 +1,9 @@
 <template>
 <v-container>
-  Clienti
+  <v-layout row fill-height>
+    <v-flex>1</v-flex>
+    <v-flex>2</v-flex>
+  </v-layout>
 </v-container>
 </template>
 

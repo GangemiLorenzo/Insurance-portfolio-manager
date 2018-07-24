@@ -16,5 +16,6 @@ module.exports = merge(prodEnv, {
     DATABASE_NAME:'"insurance-portfolio-manager"',
     BUCKET:'"insurance-portfolio-manager"'
   },
-  DONATE_LINK: '"https://www.paypal.me/LorenzoGangemi"'
+  DONATE_LINK: '"https://www.paypal.me/LorenzoGangemi"',
+  DOC_LINK: '"https://ipm.netlify.com/"'
 })

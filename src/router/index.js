@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Pages/Home'
+import Loading from '@/components/Pages/Loading'
 import Manager from '@/components/Pages/Manager/Manager'
 import Analisi from '@/components/Pages/Analisi/Analisi'
 import Clienti from '@/components/Pages/Clienti/Clienti'
@@ -13,6 +14,11 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'Loading',
+      component: Loading
+    },
+    {
+      path: '/Welcome',
       name: 'Home',
       component: Home
     },
