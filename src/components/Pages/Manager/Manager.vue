@@ -2,7 +2,7 @@
 <v-container>
 <v-layout column justify-center>
 <my-tipi-polizza></my-tipi-polizza>
-<my-scadenze></my-scadenze>
+<my-frazionamenti></my-frazionamenti>
 <my-compagnie></my-compagnie>
 </v-layout>
 </v-container>
@@ -12,7 +12,7 @@
 import PaginaBase from '@/components/Pages/PaginaBase'
 import Compagnie from './Compagnie'
 import Tipi_polizza from './Tipi_polizza'
-import Scadenze from './Scadenze'
+import Frazionamenti from './Frazionamenti'
 
 export default {
   name: 'Manager',
@@ -51,7 +51,7 @@ export default {
   components: {
     'my-compagnie': Compagnie,
     'my-tipi-polizza': Tipi_polizza,
-    'my-scadenze': Scadenze
+    'my-frazionamenti': Frazionamenti
   }
 }
 </script>
