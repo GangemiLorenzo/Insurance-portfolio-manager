@@ -6,8 +6,10 @@ import App from './App'
 import router from './router'
 import 'vuetify/dist/vuetify.min.css'
 import Vuetify from 'vuetify'
+import {calcola} from './middelware/codFiscale'
 import {firebase, auth, db, VueFire} from './middelware/firebaseInit'
 
+console.log(calcola('Barale','Simona',false,new Date('1997-05-13'),'saluzzo'))
 
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
@@ -25,20 +27,18 @@ Vue.use(Vuetify, {
 
 auth.onAuthStateChanged(function(user) {
   store.commit('utente/auth_flag',true)
-  console.log('Auth change auth_flag:' + store.getters['utente/auth_flag'])
+  //console.log('Auth change auth_flag:' + store.getters['utente/auth_flag'])
   if(user!=undefined && user.emailVerified == true){ 
     router.push({ path: `/Analisi` }) 
     user['db'] = db
     store.dispatch('utente/user',user)
   }
   else if(user!=undefined && user.emailVerified == false){
-    console.log('welcome 1')
     router.push({ path: `/Welcome` })
     user['db'] = db
     store.dispatch('utente/user',user)
   }
   else { 
-    console.log('welcome 2')
     router.push({ path: `/Welcome` })
     store.dispatch('impostazioni/clear_impostazioni')
     store.dispatch('utente/user',undefined)
@@ -47,14 +47,12 @@ auth.onAuthStateChanged(function(user) {
 
 
 router.beforeEach((to, from, next) => {
-  console.log('before each from: '+ from.path + ' to:' + to.path + ' exist: ' + to.matched.length)
+  //console.log('before each from: '+ from.path + ' to:' + to.path + ' exist: ' + to.matched.length)
   const currentUser = auth.currentUser;
   const auth_flag = store.getters['utente/auth_flag']
-  console.log('before each auth_flag:' + auth_flag)
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   if(to.matched.length) {
     if (auth_flag && requiresAuth && !currentUser) {
-      console.log('welcome 3')
       next('/Welcome')
     } else if (requiresAuth && currentUser) {
       next();
