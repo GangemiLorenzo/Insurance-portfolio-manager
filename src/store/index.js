@@ -9,6 +9,8 @@ import tipi_polizza from './modules/tipi_polizza'
 import frazionamenti from './modules/frazionamenti'
 import compagnie from './modules/compagnie'
 import impostazioni from './modules/impostazioni'
+import clienti_persone_fisiche from './modules/clienti_persone_fisiche'
+import clienti_persone_giuridiche from './modules/clienti_persone_giuridiche'
 import bus from './modules/bus'
 
 Vue.use(Vuex)
@@ -23,7 +25,9 @@ export default new Vuex.Store({
     bus,
     tipi_polizza,
     frazionamenti,
-    compagnie
+    compagnie,
+    clienti_persone_fisiche,
+    clienti_persone_giuridiche
   },
   actions
 })

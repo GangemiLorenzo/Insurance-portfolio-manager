@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<v-container fluid>
 <v-layout column justify-center>
 <my-tipi-polizza></my-tipi-polizza>
 <my-frazionamenti></my-frazionamenti>

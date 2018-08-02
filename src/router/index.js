@@ -38,7 +38,7 @@ export default new Router({
       path: '/Clienti',
       name: 'Clienti',
       component: Clienti,
-      meta: {requiresAuth: true}
+      meta: {requiresAuth: true, tabs: true}
     },
     {
       path: '/Impostazioni',

@@ -1,8 +1,16 @@
 <template>
 <v-flex>
 
-<v-toolbar class="hidden-sm-and-down">
+<v-toolbar v-if="!$vuetify.breakpoint.xsOnly" tabs>
     <v-toolbar-title>{{ INFO.APP_NAME }}</v-toolbar-title>
+    <v-tabs v-if="tabs" :color="!darktheme? 'grey lighten-4':'grey darken-4'" fixed-tabs slot="extension">
+      <v-tab @click="cambio_tab(0)">
+        Persone
+      </v-tab>
+      <v-tab @click="cambio_tab(1)">
+        Aziende
+      </v-tab>
+    </v-tabs>
     <v-divider class="mx-2" inset vertical></v-divider>
     <v-spacer></v-spacer>
     <v-toolbar-items>
@@ -27,8 +35,16 @@
 </v-toolbar>
 
 
-<v-toolbar class="hidden-md-and-up">
+<v-toolbar v-if="$vuetify.breakpoint.xsOnly">
     <v-toolbar-title>{{ INFO.APP_NAME }}</v-toolbar-title>
+    <v-tabs v-if="tabs" :color="!darktheme? 'grey lighten-4':'grey darken-4'" fixed-tabs slot="extension">
+      <v-tab @click="cambio_tab(0)">
+        Persone
+      </v-tab>
+      <v-tab @click="cambio_tab(1)">
+        Aziende
+      </v-tab>
+    </v-tabs>
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <template v-for="(item, index) in items">
@@ -115,6 +131,9 @@ export default {
     documentazione: () => {
       store.commit('bus/menu_dialog_model',false)
       window.open(process.env.DOC_LINK)
+    },
+    cambio_tab: function (n) {
+      this.selected_tab = n
     }
   },
   components: {
@@ -127,6 +146,18 @@ export default {
       },
       set: function (menu_dialog_model) {
         store.commit('bus/menu_dialog_model',menu_dialog_model)
+      }
+    },
+    ...mapGetters({
+      tabs: 'bus/tabs',
+      darktheme: 'impostazioni/dark_theme'
+    }),
+    selected_tab: {
+      get: ()=>{
+        return store.getters['bus/selected_tab']
+      },
+      set: function (selected_tab) {
+        store.commit('bus/selected_tab',selected_tab)
       }
     }
   }

@@ -1,14 +1,14 @@
 
 const state = {
-    frazionamenti: [],
+    anagrafica: [],
     ref: undefined,
     unsubscribe: undefined
   }
   
   // mutations
   const mutations = {
-    frazionamenti(state,frazionamenti) {
-        state.frazionamenti = frazionamenti
+    tipi(state,tipi) {
+        state.tipi = tipi
     },
     ref(state,ref) {
         state.ref = ref
@@ -19,30 +19,30 @@ const state = {
   }
   
   const actions = {
-      download_frazionamenti({commit, dispatch}, ref) {
+      download_tipi({commit, dispatch}, ref) {
         commit('ref',ref)
         let unsub = ref.onSnapshot(function(querySnapshot) {
-            var frazionamenti = [];
+            var tipi = [];
             querySnapshot.forEach(function(doc) {
                 let dato = doc.data();
                 dato['id'] = doc.id
-                frazionamenti.push(dato)
+                tipi.push(dato)
             })
-            commit('frazionamenti',frazionamenti)
+            commit('tipi',tipi)
         })
         commit('unsubscribe',unsub)
       },
-      clear_frazionamenti({commit})
+      clear_tipi({commit})
       {
         getters['unsubscribe']()
-        commit('frazionamenti',[])
+        commit('tipi',[])
       },
-      remove_frazionamento({dispatch,getters},id)
+      remove_tipo({dispatch,getters},id)
       {
         getters['ref'].doc(id).delete().then(function() {
             dispatch('snackbar/create',{
                 model: true, 
-                label: 'Frazionamento rimosso con successo',
+                label: 'Tipo rimosso con successo',
                 timeout: 3000, 
                 right:true, 
                 bottom:true},{root:true})
@@ -50,26 +50,27 @@ const state = {
             console.error("Error removing document: ", error)
         });
       },
-      add_frazionamento({getters, dispatch},frazionamento)
+      add_tipo({getters, dispatch},tipo)
       {
         getters['ref'].add({
-            Nome: frazionamento.nome,
-            Periodo: frazionamento.periodo,
+            Nome: tipo.nome,
+            Veicolo: tipo.veicolo,
+            Icona: tipo.icona
         }).then(function() {
             dispatch('snackbar/create',{
                 model: true, 
-                label: 'frazionamento aggiunto con successo',
+                label: 'Tipo aggiunto con successo',
                 timeout: 3000, 
                 right:true, 
                 bottom:true},{root:true})
         }).catch(function(error) {
             console.error("Error adding document: ", error)
-        })
+        });
       }
   }
   
   const getters = {
-    frazionamenti: state => { return state.frazionamenti },
+    tipi: state => { return state.tipi },
     ref: state => { return state.ref },
     unsubscribe: state => { return state.unsubscribe }
   }

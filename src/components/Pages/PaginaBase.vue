@@ -26,6 +26,9 @@ export default {
       set: function (dark_theme) {
         store.commit('impostazioni/dark_theme',dark_theme)
       }
+    },
+    xs_dev: function () {
+      return this.$vuetify.breakpoint.xsOnly
     }
   }
 }

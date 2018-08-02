@@ -1,29 +1,34 @@
 <template>
-<v-container>
-  <v-layout row fill-height>
-    <v-flex>1</v-flex>
-    <v-flex>2</v-flex>
-  </v-layout>
+<v-container fluid>
+  
+  <my-tab-pers-fisiche v-if="selected_tab==0"></my-tab-pers-fisiche>
+  <my-tab-pers-giuridiche v-if="selected_tab==1"></my-tab-pers-giuridiche>
 </v-container>
 </template>
 
 <script>
 import PaginaBase from '@/components/Pages/PaginaBase'
+import store from '@/store'
+import { mapGetters } from 'vuex'
+import tab_p_fisiche from './Tabella_persone_fisiche'
+import tab_p_giuridiche from './Tabella_persone_giuridiche'
 
 export default {
   name: 'Clienti',
    extends: PaginaBase,
   data () {
     return {
+      items: [{name:'Persone'},{name:'Aziende'}]
     }
   },
-  created: function () {
-    /*this.str.dispatch('snackbar/create',{
-            model: true, 
-            label: 'Clienti',
-            timeout: 3000, 
-            right:true, 
-            bottom:true})*/
+  components: {
+    'my-tab-pers-fisiche':tab_p_fisiche,
+    'my-tab-pers-giuridiche':tab_p_giuridiche
+  },
+  computed: {
+    ...mapGetters({
+      selected_tab: 'bus/selected_tab'
+    })
   }
 }
 </script>

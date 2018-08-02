@@ -6,7 +6,6 @@
         <my-confirm></my-confirm>
         <main fill-height><router-view></router-view></main>
       </v-container>
-    <my-footer class="hidden-sm-and-down"></my-footer>
   </v-app>
 </template>
 

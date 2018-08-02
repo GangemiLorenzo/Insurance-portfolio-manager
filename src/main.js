@@ -6,10 +6,10 @@ import App from './App'
 import router from './router'
 import 'vuetify/dist/vuetify.min.css'
 import Vuetify from 'vuetify'
-import {calcola} from './middelware/codFiscale'
 import {firebase, auth, db, VueFire} from './middelware/firebaseInit'
 
-console.log(calcola('Barale','Simona',false,new Date('1997-05-13'),'saluzzo'))
+//import {calcola} from './middelware/codiceFiscale/codFiscale'
+//console.log(calcola('Gangemi','Lorenzo',true,new Date('1997-11-24'),'Cuneo'))
 
 Vue.config.productionTip = false
 Vue.use(Vuetify, {
@@ -51,6 +51,7 @@ router.beforeEach((to, from, next) => {
   const currentUser = auth.currentUser;
   const auth_flag = store.getters['utente/auth_flag']
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  store.commit('bus/tabs',to.matched.some(record => record.meta.tabs))
   if(to.matched.length) {
     if (auth_flag && requiresAuth && !currentUser) {
       next('/Welcome')

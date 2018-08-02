@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<v-container fluid>
   Analisi
 </v-container>
 </template>

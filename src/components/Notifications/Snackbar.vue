@@ -1,27 +1,15 @@
 <template>
-<v-flex>
-  <v-snackbar class="hidden-sm-and-down"
-        :timeout="timeout"
-        :top="top"
-        :bottom="bottom"
-        :right="right"
-        :left="left"
-        v-model="snackModel"
-    >
-      {{label}}
-  </v-snackbar>
-  <v-snackbar class="hidden-md-and-up"
-        multi-line
-        :timeout="timeout"
-        :top="top"
-        :bottom="bottom"
-        :right="right"
-        :left="left"
-        v-model="snackModel"
-    >
-      {{label}}
-  </v-snackbar>
-</v-flex>
+<v-snackbar 
+      :multi-line="$vuetify.breakpoint.xsOnly"
+      :timeout="timeout"
+      :top="top"
+      :bottom="bottom"
+      :right="right"
+      :left="left"
+      v-model="snackModel"
+  >
+    {{label}}
+</v-snackbar>
 </template>
 
 <script>

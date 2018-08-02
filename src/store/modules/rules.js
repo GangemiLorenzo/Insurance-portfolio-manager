@@ -1,13 +1,13 @@
 const state = {
     checkboxRule: [
         v => !!v || 'Campo richiesto'],
-    passwordRules: [
+    passwordRule: [
         v => !!v || 'Password richiesta',
         v => (v && v.length >= 5) || 'Deve essere maggiore di 5 caratteri'],
-    nameRules: [
+    nameRule: [
         v => !!v || 'Campo richiesto',
         v => (v && v.length <= 15) || 'Deve essere minore di 15 caratteri'],
-    emailRules: [
+    emailRule: [
         v => !!v || 'E-mail richiesta',
         v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid']
   }
@@ -17,13 +17,13 @@ const state = {
         return state.checkboxRule
       },
     password: state => {
-        return state.passwordRules
+        return state.passwordRule
       },
     name: state => {
-        return state.nameRules
+        return state.nameRule
       },
     email: state => {
-        return state.emailRules
+        return state.emailRule
       }
   }
   

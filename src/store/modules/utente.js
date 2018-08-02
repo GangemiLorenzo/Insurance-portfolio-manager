@@ -68,6 +68,8 @@ const actions = {
                 dispatch('tipi_polizza/download_tipi', doc.data()['settings'].collection('tipi-di-polizza'), {root:true})
                 dispatch('frazionamenti/download_frazionamenti', doc.data()['settings'].collection('frazionamenti'), {root:true})
                 dispatch('compagnie/download_compagnie', doc.data()['settings'].collection('compagnie'), {root:true})
+                dispatch('clienti_persone_fisiche/download_anagrafica', doc.data()['clienti'].collection('persone_fisiche'), {root:true})
+                dispatch('clienti_persone_giuridiche/download_anagrafica', doc.data()['clienti'].collection('persone_giuridiche'), {root:true})
                 //avvio il listeners per uploadare i cambiamenti
                 dispatch('mutations_listener',{},{root:true})
             })
